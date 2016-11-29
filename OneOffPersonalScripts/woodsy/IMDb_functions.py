@@ -1,25 +1,26 @@
 
-import imdb
+
 import imdbpie
 
 def retrive_movie_pie(imdb_object):
    media = raw_input("enter the title of the media:")
    print ''
-   s_result = imdb_object.pie_object.search_for_title(media)
+   s_result = imdb_object.search_for_title(media)
    movie_dict = {}
    for n,item in enumerate(s_result):
-      movie_dict[n+1] = [item['title'], item['imdb_id']]
+      movie_dict[n+1] = [item['title'], item['year'], item['imdb_id']]
       if n >= 5:
          break
    print 'Id', '     **movie name**\n'
    for key in movie_dict.keys():
-      print key, '     ', movie_dict[key][0], movie_dict[key][1]
+      print key, '     ', movie_dict[key][0], movie_dict[key][1], movie_dict[key][2]
    selected_id = int(raw_input('Enter Id for correct title'))
-   movie_one_id = movie_dict[selected_id][1]
-   selected_media_one = imdb_object.get_movie(movie_one_id)
-   return selected_media_one
+   movie_one_id = movie_dict[selected_id][2]
+   return movie_one_id
+
 
 def retrive_movie(imdb_object):
+   import imdb
    media = raw_input("enter the title of the media:")
    print ''
    s_result = imdb_object.search_movie(media)
